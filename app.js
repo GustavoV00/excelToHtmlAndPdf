@@ -3,6 +3,7 @@ const Writer = require("./classes/Writer.js");
 const Processa = require("./classes/Processa.js");
 const Table = require("./classes/Table.js");
 const HtmlParser = require("./classes/HtmlParser.js");
+const PdfWriter = require("./classes/PdfWriter.js");
 const file = "./users.csv";
 
 const reader = new Reader();
@@ -14,7 +15,12 @@ async function main(){
 
     const users = new Table(dadosProcessados);
     const html = await HtmlParser.Parse(users);
-    writer.Write("arquivoGerado.html", html);
+
+    const htmlPdf = `arquivosGeradosPdf/${Date.now()}.pdf`;
+    const csvPdf = `arquivosGeradosHtml/${Date.now()}.html`;
+
+    writer.Write(csvPdf, html);
+    PdfWriter.WritePDF(htmlPdf, html);
 }
 
 main();
