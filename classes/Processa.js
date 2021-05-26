@@ -6,7 +6,7 @@ class Processa {
             const add = piece.split(",");
             result.push(add);
         });
-        console.log(result);
+        return result;
     }
 
 }
